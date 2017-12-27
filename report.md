@@ -100,7 +100,7 @@ My final model consisted of the following layers:
 ### Tuned Parameters
 The choice of these hyperparameters required several trials to reach this final combination which represents the maximum performance achieved.
 1. Epochs = 40   
-   Chosen upon the fact that the model reaches a plateau by the 15th epoch
+   Chosen upon the fact that the model reaches a plateau by the 40th epoch
 2. Batch Size = 64  
    Appropriate and efficient batch size     
 3. Learning Rate = 0.001
