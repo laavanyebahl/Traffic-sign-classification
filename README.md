@@ -16,4 +16,4 @@ The goals / steps of this project are the following:
 Instructions
 ---
 - Open Traffic_Sign_Classifier.ipynb and Traffic_Sign_Classifier.html for code
-- Open writeup.pdf for work summary
+- Open report.md and report.pdf for work summary
