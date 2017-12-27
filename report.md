@@ -99,11 +99,16 @@ My final model consisted of the following layers:
 ## Model Training
 ### Tuned Parameters
 The choice of these hyperparameters required several trials to reach this final combination which represents the maximum performance achieved.
-1. Epochs # 40   --------- Chosen upon the fact that the model reaches a plateau by the 15th epoch
-2. Batch Size # 64  --------- Appropriate and efficient batch size     
-3. Learning Rate = 0.001 --------- Through many tests, this learning rate was right before overshooting, nonetheless fast and converges
-4. Mean = 0.  &  Standard Deviation = 0.1 --------- Values fed for the tf.truncated_normal() function for weight initialization 
-5. Dropout = 0.5 --------- The probability for the dropout layers which decreased vastly the overfitting of the dataset
+1. Epochs = 40   
+   Chosen upon the fact that the model reaches a plateau by the 15th epoch
+2. Batch Size = 64  
+   Appropriate and efficient batch size     
+3. Learning Rate = 0.001
+   Through many tests, this learning rate was right before overshooting, nonetheless fast and converges
+4. Mean = 0  &  Standard Deviation = 0.1 
+   Values fed for the tf.truncated_normal() function for weight initialization 
+5. Dropout = 0.5 
+   The probability for the dropout layers which decreased vastly the overfitting of the dataset
 
     * Used the tf.nn.softmax_cross_entropy_with_logits() function to calculate the logits probabilities using: softmax + the cross entropy 
     * Used the Adam Optimizer for training the network with backpropagation and stochastic gradient descent.
