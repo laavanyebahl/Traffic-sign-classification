@@ -57,9 +57,13 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
       * Reduced the pixels values between -1. and 1. to centralize the data around the origin
       * Reduced the data's mean and standard deviation for better and more valuable training.
      
-     Here is an example of a traffic sign image before and after pre processing.
+     Here is an example of a traffic sign image before pre processing.
 
-     ![alt text][image2]                  ![alt text][image3]  
+     ![alt text][image2]             
+     
+     Here is an example of a traffic sign image after pre processing.
+          
+     ![alt text][image3]  
 
 2. Shuffling the entire data set, and labels, using the sklearn library:
      * Randomly shuffling the data for training to attain a random distribution throughout each batch for Stochastic Gradient Descent.
@@ -74,7 +78,7 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x1 --  RGB image   							| 
+| Input         		| 32x32x3 --  RGB image   							| 
 | Convolution 5x5     	| 1x1 stride + VALID padding + outputs 28x28x6 	|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride + outputs 14x14x6 				|
@@ -107,8 +111,8 @@ The choice of these hyperparameters required several trials to reach this final 
 
 ## Model Performance
 My final model results were:
-* Validation Set Accuracy = 96.01 % 
-* Test Set Accuracy = 94.2 %
+* Validation Set Accuracy = 96.07 % 
+* Test Set Accuracy = 94.27 %
 
 
 ## Testing the Model on New Images
