@@ -1,0 +1,1564 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Traffic\_Sign\_Classifier}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{self-driving-car-engineer-nanodegree}{%
+\section{Self-Driving Car Engineer
+Nanodegree}\label{self-driving-car-engineer-nanodegree}}
+
+\hypertarget{deep-learning}{%
+\subsection{Deep Learning}\label{deep-learning}}
+
+\hypertarget{project-build-a-traffic-sign-recognition-classifier}{%
+\subsection{Project: Build a Traffic Sign Recognition
+Classifier}\label{project-build-a-traffic-sign-recognition-classifier}}
+
+In this notebook, a template is provided for you to implement your
+functionality in stages, which is required to successfully complete this
+project. If additional code is required that cannot be included in the
+notebook, be sure that the Python code is successfully imported and
+included in your submission if necessary.
+
+\begin{quote}
+\textbf{Note}: Once you have completed all of the code implementations,
+you need to finalize your work by exporting the iPython Notebook as an
+HTML document. Before exporting the notebook to html, all of the code
+cells need to have been run so that reviewers can see the final
+implementation and output. You can then export the notebook by using the
+menu above and navigating to \n``,''\textbf{File -\textgreater{}
+Download as -\textgreater{} HTML (.html)}. Include the finished document
+along with this notebook as your submission.
+\end{quote}
+
+In addition to implementing code, there is a writeup to complete. The
+writeup should be completed in a separate file, which can be either a
+markdown file or a pdf document. There is a
+\href{https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup_template.md}{write
+up template} that can be used to guide the writing process. Completing
+the code template and writeup template will cover all of the
+\href{https://review.udacity.com/\#!/rubrics/481/view}{rubric points}
+for this project.
+
+The \href{https://review.udacity.com/\#!/rubrics/481/view}{rubric}
+contains ``Stand Out Suggestions'' for enhancing the project beyond the
+minimum requirements. The stand out suggestions are optional. If you
+decide to pursue the ``stand out suggestions'', you can include the code
+in this Ipython notebook and also discuss the results in the writeup
+file.
+
+\begin{quote}
+\textbf{Note:} Code and Markdown cells can be executed using the
+\textbf{Shift + Enter} keyboard shortcut. In addition, Markdown cells
+can be edited by typically double-clicking the cell to enter edit mode.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          
+          \PY{c+c1}{\PYZsh{} PREVENT MULTIPLE PRE PROCESSING}
+          \PY{n}{PRE\PYZus{}PROCESSING\PYZus{}DONE} \PY{o}{=} \PY{k+kc}{False}
+          
+          \PY{n}{NUM\PYZus{}CLASSES} \PY{o}{=} \PY{l+m+mi}{43}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-0-load-the-data}{%
+\subsection{Step 0: Load The Data}\label{step-0-load-the-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{c+c1}{\PYZsh{} Load pickled data}
+          \PY{k+kn}{import} \PY{n+nn}{pickle}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Fill this in based on where you saved the training and testing data}
+          
+          \PY{n}{training\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./traffic\PYZhy{}signs\PYZhy{}data/train.p}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{validation\PYZus{}file}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./traffic\PYZhy{}signs\PYZhy{}data/valid.p}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{testing\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./traffic\PYZhy{}signs\PYZhy{}data/test.p}\PY{l+s+s1}{\PYZsq{}}
+          
+          \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{training\PYZus{}file}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{train} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+          \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{validation\PYZus{}file}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{valid} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+          \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{testing\PYZus{}file}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{test} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+              
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{X\PYZus{}valid}\PY{p}{,} \PY{n}{y\PYZus{}valid} \PY{o}{=} \PY{n}{valid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{valid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} print(train);}
+          \PY{c+c1}{\PYZsh{} print(X\PYZus{}train);}
+          \PY{c+c1}{\PYZsh{} print(y\PYZus{}train);}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-1-dataset-summary-exploration}{%
+\subsection{Step 1: Dataset Summary \&
+Exploration}\label{step-1-dataset-summary-exploration}}
+
+The pickled data is a dictionary with 4 key/value pairs:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\textquotesingle{}features\textquotesingle{}} is a 4D array
+  containing raw pixel data of the traffic sign images, (num examples,
+  width, height, channels).
+\item
+  \texttt{\textquotesingle{}labels\textquotesingle{}} is a 1D array
+  containing the label/class id of the traffic sign. The file
+  \texttt{signnames.csv} contains id -\textgreater{} name mappings for
+  each id.
+\item
+  \texttt{\textquotesingle{}sizes\textquotesingle{}} is a list
+  containing tuples, (width, height) representing the original width and
+  height the image.
+\item
+  \texttt{\textquotesingle{}coords\textquotesingle{}} is a list
+  containing tuples, (x1, y1, x2, y2) representing coordinates of a
+  bounding box around the sign in the image. \textbf{THESE COORDINATES
+  ASSUME THE ORIGINAL IMAGE. THE PICKLED DATA CONTAINS RESIZED VERSIONS
+  (32 by 32) OF THESE IMAGES}
+\end{itemize}
+
+Complete the basic data summary below. Use python, numpy and/or pandas
+methods to calculate the data summary rather than hard coding the
+results. For example, the
+\href{http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.shape.html}{pandas
+shape method} might be useful for calculating some of the summary
+results.
+
+    \hypertarget{provide-a-basic-summary-of-the-data-set-using-python-numpy-andor-pandas}{%
+\subsubsection{Provide a Basic Summary of the Data Set Using Python,
+Numpy and/or
+Pandas}\label{provide-a-basic-summary-of-the-data-set-using-python-numpy-andor-pandas}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}226}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Replace each question mark with the appropriate value. }
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Use python, pandas or numpy methods rather than hard coding the results}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Number of training examples}
+          \PY{n}{n\PYZus{}train} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Number of validation examples}
+          \PY{n}{n\PYZus{}validation} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}valid}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} TODO: Number of testing examples.}
+          \PY{n}{n\PYZus{}test} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} TODO: What\PYZsq{}s the shape of an traffic sign image?}
+          \PY{n}{image\PYZus{}shape} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}
+          
+          \PY{c+c1}{\PYZsh{} TODO: How many unique classes/labels there are in the dataset.}
+          \PY{n}{n\PYZus{}classes} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of training examples =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n\PYZus{}train}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of validation examples =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n\PYZus{}validation}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of testing examples =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image data shape =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{image\PYZus{}shape}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of classes =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of training examples = 34799
+Number of validation examples = 4410
+Number of testing examples = 12630
+Image data shape = (32, 32, 3)
+Number of classes = 43
+
+    \end{Verbatim}
+
+    \hypertarget{include-an-exploratory-visualization-of-the-dataset}{%
+\subsubsection{Include an exploratory visualization of the
+dataset}\label{include-an-exploratory-visualization-of-the-dataset}}
+
+    Visualize the German Traffic Signs Dataset using the pickled file(s).
+This is open ended, suggestions include: plotting traffic sign images,
+plotting the count of each sign, etc.
+
+The \href{http://matplotlib.org/}{Matplotlib}
+\href{http://matplotlib.org/examples/index.html}{examples} and
+\href{http://matplotlib.org/gallery.html}{gallery} pages are a great
+resource for doing visualizations in Python.
+
+\textbf{NOTE:} It's recommended you start with something simple first.
+If you wish to do more, come back to it after you've completed the rest
+of the sections. It can be interesting to look at the distribution of
+classes in the training, validation and test set. Is the distribution
+the same? Are there more examples of some classes than others?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}227}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Data exploration visualization code goes here.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{c+c1}{\PYZsh{} Visualizations will be shown in the notebook.}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{k+kn}{import} \PY{n+nn}{csv}
+          
+          
+          \PY{c+c1}{\PYZsh{}Import traffic signs class names}
+          \PY{n}{signs\PYZus{}class}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{signnames.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+              \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                  \PY{n}{signs\PYZus{}class}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SignName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                  
+                  
+          \PY{n}{len\PYZus{}samples}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{:}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{x\PYZus{}selected} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{y\PYZus{}train} \PY{o}{==} \PY{n}{i}\PY{p}{]}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{x\PYZus{}selected}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}draw the first image of each class}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{signs\PYZus{}class}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              \PY{n}{len\PYZus{}samples}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}selected}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Plot number of images per class}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n}{len\PYZus{}samples}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution graph}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of images}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Minimum number of images for each label =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n}{len\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Maximum number of images for each label =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{len\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Minimum number of images for each label = 180
+Maximum number of images for each label = 2010
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-2-design-and-test-a-model-architecture}{%
+\subsection{Step 2: Design and Test a Model
+Architecture}\label{step-2-design-and-test-a-model-architecture}}
+
+Design and implement a deep learning model that learns to recognize
+traffic signs. Train and test your model on the
+\href{http://benchmark.ini.rub.de/?section=gtsrb\&subsection=dataset}{German
+Traffic Sign Dataset}.
+
+The LeNet-5 implementation shown in the
+\href{https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/6df7ae49-c61c-4bb2-a23e-6527e69209ec/lessons/601ae704-1035-4287-8b11-e2c2716217ad/concepts/d4aca031-508f-4e0b-b493-e7b706120f81}{classroom}
+at the end of the CNN lesson is a solid starting point. You'll have to
+change the number of classes and possibly the preprocessing, but aside
+from that it's plug and play!
+
+With the LeNet-5 solution from the lecture, you should expect a
+validation set accuracy of about 0.89. To meet specifications, the
+validation set accuracy will need to be at least 0.93. It is possible to
+get an even higher accuracy, but 0.93 is the minimum for a successful
+project submission.
+
+There are various aspects to consider when thinking about this problem:
+
+\begin{itemize}
+\tightlist
+\item
+  Neural network architecture (is the network over or underfitting?)
+\item
+  Play around preprocessing techniques (normalization, rgb to grayscale,
+  etc)
+\item
+  Number of examples per label (some have more than others).
+\item
+  Generate fake data.
+\end{itemize}
+
+Here is an example of a
+\href{http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf}{published
+baseline model on this problem}. It's not required to be familiar with
+the approach used in the paper but, it's good practice to try to read
+papers like these.
+
+    \hypertarget{pre-process-the-data-set-normalization-grayscale-etc.}{%
+\subsubsection{Pre-process the Data Set (normalization, grayscale,
+etc.)}\label{pre-process-the-data-set-normalization-grayscale-etc.}}
+
+    Minimally, the image data should be normalized so that the data has mean
+zero and equal variance. For image data, \texttt{(pixel\ -\ 128)/\ 128}
+is a quick way to approximately normalize the data and can be used in
+this project.
+
+Other pre-processing steps are optional. You can try different
+techniques to see if it improves performance.
+
+Use the code cell (or multiple code cells, if necessary) to implement
+the first step of your project.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}228}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Preprocess the data here. It is required to normalize the data. Other preprocessing steps could include }
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} converting to grayscale, etc.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+          
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{cv2}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{shuffle}
+          
+          \PY{c+c1}{\PYZsh{} 1. Normalize image data X}
+          \PY{c+c1}{\PYZsh{} 2. Shuffle data to prevent ordered learning }
+          \PY{c+c1}{\PYZsh{} 3. Convert to one hot later ikn the training section with tf.one\PYZus{}hot}
+          \PY{k}{def} \PY{n+nf}{preprocess\PYZus{}data}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+           
+              \PY{c+c1}{\PYZsh{} Mean normalizes the pixel and make all image array values fall within the range \PYZhy{}1 to 1}
+              \PY{c+c1}{\PYZsh{} Note all values in original images are between 0 and 255, as uint8}
+              \PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{X} \PY{o}{\PYZhy{}} \PY{l+m+mf}{128.}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{128.}
+              
+              \PY{c+c1}{\PYZsh{} DATA SHUFFLE}
+              \PY{n}{shuffled\PYZus{}X}\PY{p}{,} \PY{n}{shuffled\PYZus{}y} \PY{o}{=} \PY{n}{shuffle}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+          
+              \PY{k}{return} \PY{n}{shuffled\PYZus{}X}\PY{p}{,} \PY{n}{shuffled\PYZus{}y}
+          
+          
+          \PY{c+c1}{\PYZsh{} PRE \PYZhy{} PROCESS DATA}
+          \PY{k}{if} \PY{n}{PRE\PYZus{}PROCESSING\PYZus{}DONE}\PY{o}{==}\PY{k+kc}{False}\PY{p}{:}
+              \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{preprocess\PYZus{}data}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+              \PY{n}{X\PYZus{}valid}\PY{p}{,} \PY{n}{y\PYZus{}valid} \PY{o}{=} \PY{n}{preprocess\PYZus{}data}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{p}{,} \PY{n}{y\PYZus{}valid}\PY{p}{)}
+              \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{preprocess\PYZus{}data}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+              \PY{n}{PRE\PYZus{}PROCESSING\PYZus{}DONE} \PY{o}{=} \PY{k+kc}{True}
+          
+          
+          \PY{c+c1}{\PYZsh{} SHOW AND PRINT PRE PROCESSED AND SHUFFLED VALUE}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{signs\PYZus{}class}\PY{p}{[}\PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{} Index: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[[-0.57031 -0.53906 -0.47656]
+  [-0.61719 -0.59375 -0.53125]
+  [-0.61719 -0.60938 -0.60938]
+  {\ldots}, 
+  [-0.44531 -0.48438 -0.44531]
+  [-0.375   -0.375   -0.32812]
+  [-0.47656 -0.42969 -0.36719]]
+
+ [[-0.60156 -0.60156 -0.55469]
+  [-0.625   -0.625   -0.57031]
+  [-0.625   -0.625   -0.64062]
+  {\ldots}, 
+  [-0.48438 -0.5     -0.46875]
+  [-0.46875 -0.46875 -0.42188]
+  [-0.48438 -0.46094 -0.40625]]
+
+ [[-0.64062 -0.64062 -0.59375]
+  [-0.64844 -0.64844 -0.60156]
+  [-0.625   -0.64062 -0.64062]
+  {\ldots}, 
+  [-0.52344 -0.52344 -0.49219]
+  [-0.53906 -0.53906 -0.49219]
+  [-0.52344 -0.51562 -0.46875]]
+
+ {\ldots}, 
+ [[-0.25781 -0.32031 -0.42969]
+  [-0.28906 -0.34375 -0.42969]
+  [-0.33594 -0.375   -0.47656]
+  {\ldots}, 
+  [-0.23438 -0.23438 -0.20312]
+  [-0.23438 -0.22656 -0.17188]
+  [-0.23438 -0.21875 -0.16406]]
+
+ [[-0.375   -0.38281 -0.47656]
+  [-0.39062 -0.39844 -0.45312]
+  [-0.375   -0.375   -0.44531]
+  {\ldots}, 
+  [-0.20312 -0.17188 -0.10938]
+  [-0.22656 -0.1875  -0.10938]
+  [-0.23438 -0.1875  -0.11719]]
+
+ [[-0.36719 -0.35938 -0.39844]
+  [-0.375   -0.36719 -0.375  ]
+  [-0.375   -0.36719 -0.375  ]
+  {\ldots}, 
+  [-0.21094 -0.17969 -0.11719]
+  [-0.23438 -0.20312 -0.13281]
+  [-0.23438 -0.19531 -0.125  ]]] 
+
+Keep right - Index: 38
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{tensorflow-setup-and-gpu-check}{%
+\subsection{Tensorflow Setup and GPU
+Check}\label{tensorflow-setup-and-gpu-check}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}229}]:} \PY{c+c1}{\PYZsh{} PRE\PYZhy{} REQUISITES :  Download carnd\PYZhy{}term1 with gpu enabled , }
+          \PY{c+c1}{\PYZsh{} Remove existing and install with condo with command : conda env create \PYZhy{}f environment\PYZhy{}gpu.yml}
+          
+          \PY{c+c1}{\PYZsh{} TENSORFLOW RELEASE INFORMATION OFFICIAL}
+          \PY{c+c1}{\PYZsh{} All our prebuilt binaries have been built with CUDA 8 and cuDNN 6.}
+          \PY{c+c1}{\PYZsh{} We anticipate releasing TensorFlow 1.5 with CUDA 9 and cuDNN 7.}
+          
+          \PY{c+c1}{\PYZsh{} https://devtalk.nvidia.com/default/topic/1026198/cuda\PYZhy{}9\PYZhy{}0\PYZhy{}importerror\PYZhy{}libcublas\PYZhy{}so\PYZhy{}8\PYZhy{}0/}
+          
+          \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+          \PY{c+c1}{\PYZsh{} Check for a GPU}
+          \PY{k}{if} \PY{o+ow}{not} \PY{n}{tf}\PY{o}{.}\PY{n}{test}\PY{o}{.}\PY{n}{gpu\PYZus{}device\PYZus{}name}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{warnings}\PY{o}{.}\PY{n}{warn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No GPU found. Please use a GPU to train your neural network.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Default GPU Device: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{test}\PY{o}{.}\PY{n}{gpu\PYZus{}device\PYZus{}name}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        AttributeError                            Traceback (most recent call last)
+
+        <ipython-input-229-b1fe6d710a93> in <module>()
+         10 import tensorflow as tf
+         11 \# Check for a GPU
+    ---> 12 if not tf.test.gpu\_device\_name():
+         13     warnings.warn('No GPU found. Please use a GPU to train your neural network.')
+         14 else:
+
+
+        AttributeError: module 'tensorflow.python.platform.test' has no attribute 'gpu\_device\_name'
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Creates a graph.}
+        \PY{n}{a} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{,} \PY{l+m+mf}{4.0}\PY{p}{,} \PY{l+m+mf}{5.0}\PY{p}{,} \PY{l+m+mf}{6.0}\PY{p}{]}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{,} \PY{l+m+mf}{4.0}\PY{p}{,} \PY{l+m+mf}{5.0}\PY{p}{,} \PY{l+m+mf}{6.0}\PY{p}{]}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Creates a session with log\PYZus{}device\PYZus{}placement set to True.}
+        \PY{n}{sess} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{n}{config}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{ConfigProto}\PY{p}{(}\PY{n}{log\PYZus{}device\PYZus{}placement}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Runs the op.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{c}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{model-architecture}{%
+\subsection{Model Architecture}\label{model-architecture}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}230}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Define your architecture here.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+          
+          \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+          
+          \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} With LeNet1\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{c+c1}{\PYZsh{} Accuracy below is dependent on shuffling as well}
+          
+          \PY{c+c1}{\PYZsh{}Model Parameters Set}
+          \PY{c+c1}{\PYZsh{} EPOCHS = 15}
+          \PY{c+c1}{\PYZsh{} BATCH\PYZus{}SIZE = 128}
+          \PY{c+c1}{\PYZsh{} learn\PYZus{}rate = 0.001}
+          \PY{c+c1}{\PYZsh{} \PYZsh{} accuracy of 94.6}
+          
+          \PY{c+c1}{\PYZsh{} OR}
+          
+          \PY{c+c1}{\PYZsh{} EPOCHS = 15}
+          \PY{c+c1}{\PYZsh{} BATCH\PYZus{}SIZE = 64}
+          \PY{c+c1}{\PYZsh{} \PYZsh{} accuracy of 94.2}
+          
+          \PY{c+c1}{\PYZsh{} OR}
+          
+          \PY{n}{EPOCHS} \PY{o}{=} \PY{l+m+mi}{40}
+          \PY{n}{BATCH\PYZus{}SIZE} \PY{o}{=} \PY{l+m+mi}{64}
+          \PY{c+c1}{\PYZsh{} accuracy of 96.1}
+          \PY{c+c1}{\PYZsh{} Test accuracy of 95.1}
+          \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          
+          \PY{n}{LEARN\PYZus{}RATE} \PY{o}{=} \PY{l+m+mf}{0.001}
+          \PY{n}{MEAN} \PY{o}{=} \PY{l+m+mf}{0.}
+          \PY{n}{STD\PYZus{}DEV} \PY{o}{=} \PY{l+m+mf}{0.1}
+          \PY{n}{DROPOUT} \PY{o}{=} \PY{l+m+mf}{0.5}
+\end{Verbatim}
+
+
+    \hypertarget{lenet-architecture}{%
+\subsection{LeNet Architecture}\label{lenet-architecture}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}231}]:} \PY{c+c1}{\PYZsh{}Function for Initializing Random TF Variables}
+          \PY{k}{def} \PY{n+nf}{trun\PYZus{}var}\PY{p}{(}\PY{n}{dim}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{MEAN}\PY{p}{,} \PY{n}{std}\PY{o}{=}\PY{n}{STD\PYZus{}DEV}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{n}{dim}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{n}{mean}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{n}{std}\PY{p}{)}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{n}{name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}232}]:} \PY{k}{def} \PY{n+nf}{LeNet}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{keep\PYZus{}prob}\PY{p}{)}\PY{p}{:}    
+          
+              \PY{c+c1}{\PYZsh{}Initializing Weights and Biases}
+              \PY{n}{weights} \PY{o}{=} \PY{p}{\PYZob{}}    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weights\PYZus{}conv1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weights\PYZus{}conv2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{400}\PY{p}{,}\PY{l+m+mi}{120}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weights\PYZus{}full\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{120}\PY{p}{,}\PY{l+m+mi}{83}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weights\PYZus{}full\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{83}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weights\PYZus{}out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{\PYZcb{}}
+          
+              \PY{n}{biases} \PY{o}{=} \PY{p}{\PYZob{}}     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{biases\PYZus{}conv1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{16}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{biases\PYZus{}conv2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{120}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{biases\PYZus{}full\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{83}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{biases\PYZus{}full\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trun\PYZus{}var}\PY{p}{(}\PY{p}{[}\PY{n}{n\PYZus{}classes}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{biases\PYZus{}out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{\PYZcb{}}
+          
+              \PY{c+c1}{\PYZsh{}LeNet CNN Model Implementation}
+          
+          
+              \PY{c+c1}{\PYZsh{}Convolutional Layer 1}
+              \PY{c+c1}{\PYZsh{}INPUT 32x32x1}
+              \PY{n}{conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VALID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+              \PY{c+c1}{\PYZsh{}28x28x6}
+              \PY{n}{conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{bias\PYZus{}add}\PY{p}{(}\PY{n}{conv1}\PY{p}{,} \PY{n}{biases}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n}{conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{conv1}\PY{p}{)}
+              \PY{n}{conv1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{max\PYZus{}pool}\PY{p}{(}\PY{n}{conv1}\PY{p}{,} \PY{n}{ksize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}    
+              \PY{c+c1}{\PYZsh{}14x14x6}
+          
+              \PY{c+c1}{\PYZsh{}Convolutional Layer 2}
+              \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n}{conv1}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VALID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}10x10x16}
+              \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{bias\PYZus{}add}\PY{p}{(}\PY{n}{conv2}\PY{p}{,} \PY{n}{biases}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} USED IN OPTIONAL 5 SECTION}
+              \PY{n}{CONV2\PYZus{}BIAS} \PY{o}{=} \PY{n}{conv2}
+              
+              \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{conv2}\PY{p}{)}
+              \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{max\PYZus{}pool}\PY{p}{(}\PY{n}{conv2}\PY{p}{,} \PY{n}{ksize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}    
+              \PY{c+c1}{\PYZsh{}5x5x16}
+          
+              \PY{c+c1}{\PYZsh{}Flatten}
+              \PY{n}{conv2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{n}{conv2}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}400}
+          
+              \PY{c+c1}{\PYZsh{}Fully Connected Layer 1}
+              \PY{n}{full\PYZus{}1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{conv2}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{biases}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}    
+              \PY{c+c1}{\PYZsh{}120}
+              \PY{n}{full\PYZus{}1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{full\PYZus{}1}\PY{p}{)}
+              \PY{n}{full\PYZus{}1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{full\PYZus{}1}\PY{p}{,} \PY{n}{keep\PYZus{}prob}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{}Fully Connected Layer 2}
+              \PY{n}{full\PYZus{}2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{full\PYZus{}1}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{biases}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}    
+              \PY{c+c1}{\PYZsh{}83}
+              \PY{n}{full\PYZus{}2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{full\PYZus{}2}\PY{p}{)}
+              \PY{n}{full\PYZus{}2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{full\PYZus{}2}\PY{p}{,} \PY{n}{keep\PYZus{}prob}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{}Output Layer}
+              \PY{n}{logits} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{full\PYZus{}2}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{biases}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}  
+              \PY{k}{return} \PY{n}{logits}\PY{p}{,} \PY{n}{CONV2\PYZus{}BIAS}
+              \PY{c+c1}{\PYZsh{}N\PYZus{}CLASSES = 43}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}233}]:} \PY{c+c1}{\PYZsh{} TODO}
+          
+          \PY{c+c1}{\PYZsh{} def LeNet2(x, keep\PYZus{}prob):    }
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}Initializing Weights and Biases}
+          \PY{c+c1}{\PYZsh{}     weights = \PYZob{}    \PYZsq{}conv1\PYZsq{}: trun\PYZus{}var([3,3,3,12], name=\PYZsq{}weights\PYZus{}conv1\PYZsq{}),}
+          \PY{c+c1}{\PYZsh{}                    \PYZsq{}conv2\PYZsq{}: trun\PYZus{}var([3,3,12,24], name=\PYZsq{}weights\PYZus{}conv2\PYZsq{}),}
+          \PY{c+c1}{\PYZsh{}                    \PYZsq{}full\PYZus{}1\PYZsq{}: trun\PYZus{}var([600,353], name=\PYZsq{}weights\PYZus{}full\PYZus{}1\PYZsq{}),}
+          \PY{c+c1}{\PYZsh{}                    \PYZsq{}full\PYZus{}2\PYZsq{}: trun\PYZus{}var([353,83], name=\PYZsq{}weights\PYZus{}full\PYZus{}2\PYZsq{}),}
+          \PY{c+c1}{\PYZsh{}                    \PYZsq{}out\PYZsq{}: trun\PYZus{}var([83, n\PYZus{}classes], name=\PYZsq{}weights\PYZus{}out\PYZsq{})\PYZcb{}}
+          
+          \PY{c+c1}{\PYZsh{}     biases = \PYZob{}     \PYZsq{}conv1\PYZsq{}: trun\PYZus{}var([12], name=\PYZsq{}biases\PYZus{}conv1\PYZsq{}),}
+          \PY{c+c1}{\PYZsh{}                    \PYZsq{}conv2\PYZsq{}: trun\PYZus{}var([24], name=\PYZsq{}biases\PYZus{}conv2\PYZsq{}),}
+          \PY{c+c1}{\PYZsh{}                    \PYZsq{}full\PYZus{}1\PYZsq{}: trun\PYZus{}var([353], name=\PYZsq{}biases\PYZus{}full\PYZus{}1\PYZsq{}),}
+          \PY{c+c1}{\PYZsh{}                    \PYZsq{}full\PYZus{}2\PYZsq{}: trun\PYZus{}var([83], name=\PYZsq{}biases\PYZus{}full\PYZus{}2\PYZsq{}),}
+          \PY{c+c1}{\PYZsh{}                    \PYZsq{}out\PYZsq{}: trun\PYZus{}var([n\PYZus{}classes], name=\PYZsq{}biases\PYZus{}out\PYZsq{})\PYZcb{}}
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}LeNet CNN Model Implementation}
+          
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}Convolutional Layer 1}
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}INPUT 32x32x1}
+          \PY{c+c1}{\PYZsh{}     conv1 = tf.nn.conv2d(x, weights[\PYZsq{}conv1\PYZsq{}], strides=[1,1,1,1], padding=\PYZsq{}VALID\PYZsq{}) }
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}28x28x12}
+          \PY{c+c1}{\PYZsh{}     conv1 = tf.nn.bias\PYZus{}add(conv1, biases[\PYZsq{}conv1\PYZsq{}])}
+          \PY{c+c1}{\PYZsh{}     conv1 = tf.nn.relu(conv1)}
+          \PY{c+c1}{\PYZsh{}     conv1 = tf.nn.max\PYZus{}pool(conv1, ksize=[1,2,2,1], strides=[1,2,2,1], padding=\PYZsq{}SAME\PYZsq{})    }
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}14x14x24}
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}Convolutional Layer 2}
+          \PY{c+c1}{\PYZsh{}     conv2 = tf.nn.conv2d(conv1, weights[\PYZsq{}conv2\PYZsq{}], strides=[1,1,1,1], padding=\PYZsq{}VALID\PYZsq{})}
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}10x10x24}
+          \PY{c+c1}{\PYZsh{}     conv2 = tf.nn.bias\PYZus{}add(conv2, biases[\PYZsq{}conv2\PYZsq{}])}
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{} USED IN OPTIONAL 5 SECTION}
+          \PY{c+c1}{\PYZsh{}     CONV2\PYZus{}BIAS = conv2}
+              
+          \PY{c+c1}{\PYZsh{}     conv2 = tf.nn.relu(conv2)}
+          \PY{c+c1}{\PYZsh{}     conv2 = tf.nn.max\PYZus{}pool(conv2, ksize=[1,2,2,1], strides=[1,2,2,1], padding=\PYZsq{}SAME\PYZsq{})    }
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}5x5x24}
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}Flatten}
+          \PY{c+c1}{\PYZsh{}     conv2 = tf.contrib.layers.flatten(conv2)}
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}600}
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}Fully Connected Layer 1}
+          \PY{c+c1}{\PYZsh{}     full\PYZus{}1 = tf.add(tf.matmul(conv2, weights[\PYZsq{}full\PYZus{}1\PYZsq{}]), biases[\PYZsq{}full\PYZus{}1\PYZsq{}])    }
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}353}
+          \PY{c+c1}{\PYZsh{}     full\PYZus{}1 = tf.nn.relu(full\PYZus{}1)}
+          \PY{c+c1}{\PYZsh{}     full\PYZus{}1 = tf.nn.dropout(full\PYZus{}1, keep\PYZus{}prob)}
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}Fully Connected Layer 2}
+          \PY{c+c1}{\PYZsh{}     full\PYZus{}2 = tf.add(tf.matmul(full\PYZus{}1, weights[\PYZsq{}full\PYZus{}2\PYZsq{}]), biases[\PYZsq{}full\PYZus{}2\PYZsq{}])    }
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}83}
+          \PY{c+c1}{\PYZsh{}     full\PYZus{}2 = tf.nn.relu(full\PYZus{}2)}
+          \PY{c+c1}{\PYZsh{}     full\PYZus{}2 = tf.nn.dropout(full\PYZus{}2, keep\PYZus{}prob)}
+          
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}Output Layer}
+          \PY{c+c1}{\PYZsh{}     logits = tf.add(tf.matmul(full\PYZus{}2, weights[\PYZsq{}out\PYZsq{}]), biases[\PYZsq{}out\PYZsq{}])  }
+          \PY{c+c1}{\PYZsh{}     return logits, CONV2\PYZus{}BIAS}
+          \PY{c+c1}{\PYZsh{}     \PYZsh{}N\PYZus{}CLASSES = 43}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}234}]:} \PY{c+c1}{\PYZsh{}Placeholders for Network}
+          \PY{n}{x} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{p}{[}\PY{k+kc}{None}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{}Colored}
+          \PY{n}{y} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{p}{[}\PY{k+kc}{None}\PY{p}{]}\PY{p}{)}
+          \PY{n}{one\PYZus{}hot\PYZus{}y} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{one\PYZus{}hot}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+          \PY{n}{labels} \PY{o}{=} \PY{n}{one\PYZus{}hot\PYZus{}y}
+          \PY{n}{keep\PYZus{}prob} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}235}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Training}
+          
+          \PY{n}{logits}\PY{p}{,} \PY{n}{CONV2\PYZus{}BIAS} \PY{o}{=} \PY{n}{LeNet}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{keep\PYZus{}prob}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} logits = LeNet2(x,keep\PYZus{}prob)}
+          
+          
+          \PY{c+c1}{\PYZsh{}Cost Function}
+          \PY{n}{cost} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits}\PY{p}{(}\PY{n}{logits}\PY{o}{=}\PY{n}{logits}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{)}    
+          
+          \PY{c+c1}{\PYZsh{}Adam Optimizer for Back Propagation}
+          \PY{n}{optimizer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{AdamOptimizer}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{n}{LEARN\PYZus{}RATE}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{cost}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}236}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Prediction and Accuracy}
+          
+          \PY{n}{correct\PYZus{}prediction} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{equal}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{logits}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{accuracy} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{correct\PYZus{}prediction}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{train-validate-and-test-the-model}{%
+\subsubsection{Train, Validate and Test the
+Model}\label{train-validate-and-test-the-model}}
+
+    A validation set can be used to assess how well the model is performing.
+A low accuracy on the training and validation sets imply underfitting. A
+high accuracy on the training set but low accuracy on the validation set
+implies overfitting.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}237}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Train your model here.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Calculate and report the accuracy on the training and validation set.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Once a final model architecture is selected, }
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} the accuracy on the test set should be calculated and reported as well.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+          
+          
+          \PY{n}{init} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} To save the model}
+          \PY{n}{saver} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{Saver}\PY{p}{(}\PY{p}{)}
+          \PY{n}{save\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./lenet\PYZus{}traffic.ckpt}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{c+c1}{\PYZsh{} Running LeNet and Training on Training Set}
+          \PY{c+c1}{\PYZsh{} Measuring Accuracy on Validation Set}
+          
+          \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+              \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{init}\PY{p}{)}
+                      
+              \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{EPOCHS}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{start\PYZus{}i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}train}\PY{p}{,} \PY{n}{BATCH\PYZus{}SIZE}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{end\PYZus{}i} \PY{o}{=} \PY{n}{start\PYZus{}i} \PY{o}{+} \PY{n}{BATCH\PYZus{}SIZE}
+                      \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{optimizer}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{start\PYZus{}i}\PY{p}{:}\PY{n}{end\PYZus{}i}\PY{p}{]}\PY{p}{,}
+                                                     \PY{n}{y}\PY{p}{:} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{n}{start\PYZus{}i}\PY{p}{:}\PY{n}{end\PYZus{}i}\PY{p}{]} \PY{p}{,}
+                                                     \PY{n}{keep\PYZus{}prob}\PY{p}{:} \PY{n}{DROPOUT}\PY{p}{\PYZcb{}}\PY{p}{)}
+                  
+                  \PY{n}{valid\PYZus{}acc} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{accuracy}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{X\PYZus{}valid}\PY{p}{,}
+                                                            \PY{n}{y}\PY{p}{:} \PY{n}{y\PYZus{}valid}\PY{p}{,}
+                                                            \PY{n}{keep\PYZus{}prob}\PY{p}{:} \PY{l+m+mf}{1.}\PY{p}{\PYZcb{}}\PY{p}{)}
+                  
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EPOCH: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{epoch}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Validation Accuracy = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{valid\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+                  
+          
+              \PY{n}{saver}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{save\PYZus{}file}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model saved}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+EPOCH: 1
+Validation Accuracy = 0.6501134037971497
+EPOCH: 2
+Validation Accuracy = 0.8387755155563354
+EPOCH: 3
+Validation Accuracy = 0.8931972980499268
+EPOCH: 4
+Validation Accuracy = 0.9145124554634094
+EPOCH: 5
+Validation Accuracy = 0.9274376630783081
+EPOCH: 6
+Validation Accuracy = 0.939002275466919
+EPOCH: 7
+Validation Accuracy = 0.9455782175064087
+EPOCH: 8
+Validation Accuracy = 0.9512471556663513
+EPOCH: 9
+Validation Accuracy = 0.9455782175064087
+EPOCH: 10
+Validation Accuracy = 0.9512471556663513
+EPOCH: 11
+Validation Accuracy = 0.9530612230300903
+EPOCH: 12
+Validation Accuracy = 0.9548752903938293
+EPOCH: 13
+Validation Accuracy = 0.956916093826294
+EPOCH: 14
+Validation Accuracy = 0.9594104290008545
+EPOCH: 15
+Validation Accuracy = 0.9591836929321289
+EPOCH: 16
+Validation Accuracy = 0.956462562084198
+EPOCH: 17
+Validation Accuracy = 0.9609977602958679
+EPOCH: 18
+Validation Accuracy = 0.9560090899467468
+EPOCH: 19
+Validation Accuracy = 0.9573696255683899
+EPOCH: 20
+Validation Accuracy = 0.9657596349716187
+EPOCH: 21
+Validation Accuracy = 0.9673469662666321
+EPOCH: 22
+Validation Accuracy = 0.9553288221359253
+EPOCH: 23
+Validation Accuracy = 0.9571428298950195
+EPOCH: 24
+Validation Accuracy = 0.956462562084198
+EPOCH: 25
+Validation Accuracy = 0.9707483053207397
+EPOCH: 26
+Validation Accuracy = 0.9603174328804016
+EPOCH: 27
+Validation Accuracy = 0.9653061032295227
+EPOCH: 28
+Validation Accuracy = 0.960544228553772
+EPOCH: 29
+Validation Accuracy = 0.9655328989028931
+EPOCH: 30
+Validation Accuracy = 0.9698412418365479
+EPOCH: 31
+Validation Accuracy = 0.960090696811676
+EPOCH: 32
+Validation Accuracy = 0.9671201705932617
+EPOCH: 33
+Validation Accuracy = 0.9566893577575684
+EPOCH: 34
+Validation Accuracy = 0.9657596349716187
+EPOCH: 35
+Validation Accuracy = 0.9689342379570007
+EPOCH: 36
+Validation Accuracy = 0.961904764175415
+EPOCH: 37
+Validation Accuracy = 0.9612244963645935
+EPOCH: 38
+Validation Accuracy = 0.9666666388511658
+EPOCH: 39
+Validation Accuracy = 0.9562358260154724
+EPOCH: 40
+Validation Accuracy = 0.9603174328804016
+Model saved
+
+    \end{Verbatim}
+
+    \hypertarget{running-on-test-set}{%
+\subsection{Running on Test Set}\label{running-on-test-set}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Test Set Accuracy}
+          
+          \PY{n}{saver} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{Saver}\PY{p}{(}\PY{p}{)}
+          \PY{n}{test\PYZus{}data\PYZus{}size} \PY{o}{=}  \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+              \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{save\PYZus{}file}\PY{p}{)}
+              \PY{n}{total\PYZus{}test\PYZus{}acc} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{start\PYZus{}i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}size} \PY{p}{,} \PY{n}{BATCH\PYZus{}SIZE}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{end\PYZus{}i} \PY{o}{=} \PY{n}{start\PYZus{}i} \PY{o}{+} \PY{n}{BATCH\PYZus{}SIZE}
+                  \PY{n}{X\PYZus{}batch\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}batch\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{n}{start\PYZus{}i}\PY{p}{:}\PY{n}{end\PYZus{}i}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{[}\PY{n}{start\PYZus{}i}\PY{p}{:}\PY{n}{end\PYZus{}i}\PY{p}{]}
+                  \PY{n}{test\PYZus{}acc} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{accuracy}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{X\PYZus{}batch\PYZus{}test}\PY{p}{,}
+                                                           \PY{n}{y}\PY{p}{:} \PY{n}{y\PYZus{}batch\PYZus{}test}\PY{p}{,}
+                                                           \PY{n}{keep\PYZus{}prob}\PY{p}{:} \PY{l+m+mf}{1.}\PY{p}{\PYZcb{}}\PY{p}{)}
+                  \PY{n}{total\PYZus{}test\PYZus{}acc} \PY{o}{+}\PY{o}{=} \PY{n}{test\PYZus{}acc} \PY{o}{*} \PY{n}{X\PYZus{}batch\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{n}{total\PYZus{}test\PYZus{}acc} \PY{o}{/}\PY{o}{=} \PY{n}{test\PYZus{}data\PYZus{}size}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Accuracy = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{total\PYZus{}test\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Accuracy = 0.9429928740809479
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-3-test-a-model-on-new-images}{%
+\subsection{Step 3: Test a Model on New
+Images}\label{step-3-test-a-model-on-new-images}}
+
+To give yourself more insight into how your model is working, download
+at least five pictures of German traffic signs from the web and use your
+model to predict the traffic sign type.
+
+You may find \texttt{signnames.csv} useful as it contains mappings from
+the class id (integer) to the actual sign name.
+
+    \hypertarget{load-and-output-the-images}{%
+\subsubsection{Load and Output the
+Images}\label{load-and-output-the-images}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}216}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Load the images and plot them here.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+          
+          \PY{k+kn}{import} \PY{n+nn}{os}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{as} \PY{n+nn}{mpimg}
+          
+          
+          \PY{n}{path} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./web\PYZus{}images\PYZus{}test/}\PY{l+s+s1}{\PYZsq{}}
+          
+          \PY{n}{imgs} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{11.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{12.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{13.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{22.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{27.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{30.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n}{test\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{img} \PY{o+ow}{in} \PY{n}{imgs}\PY{p}{:}
+              \PY{n}{test\PYZus{}labels}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{splitext}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}labels}\PY{p}{)}
+          
+          \PY{n}{num\PYZus{}images} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}labels}\PY{p}{)}
+          \PY{n}{test\PYZus{}imgs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{n}{num\PYZus{}images}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{}Loading and Previewing Images Downloaded from the Internet}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{test\PYZus{}imgs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+              
+          \PY{c+c1}{\PYZsh{}     DO NOT USE cv2.imread() : DOES NOT LOAD IN THE SAME FORMAT}
+          \PY{c+c1}{\PYZsh{}     test\PYZus{}imgs[i] = cv2.imread(path + imgs[i])}
+              \PY{n}{test\PYZus{}imgs}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{path} \PY{o}{+} \PY{n}{imgs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+              \PY{k}{for} \PY{n}{img} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}imgs}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{sub\PYZus{}img} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{img}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                  \PY{n}{sub\PYZus{}img}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{signs\PYZus{}class}\PY{p}{[}\PY{n}{test\PYZus{}labels}\PY{p}{[}\PY{n}{img}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{sub\PYZus{}img}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{test\PYZus{}imgs}\PY{p}{[}\PY{n}{img}\PY{p}{]}\PY{p}{)}
+                  
+          \PY{c+c1}{\PYZsh{} Print shape of test image        }
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}imgs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1, 11, 12, 13, 22, 27, 30]
+(32, 32, 3)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{predict-the-sign-type-for-each-image}{%
+\subsubsection{Predict the Sign Type for Each
+Image}\label{predict-the-sign-type-for-each-image}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{c+c1}{\PYZsh{} Pre process the images}
+          
+          \PY{n}{X\PYZus{}web\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}web\PYZus{}test} \PY{o}{=} \PY{n}{preprocess\PYZus{}data}\PY{p}{(}\PY{n}{test\PYZus{}imgs}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{}Loading and Previewing Preprocessed Images}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{img} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}web\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{sub\PYZus{}img} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{img}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{sub\PYZus{}img}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{signs\PYZus{}class}\PY{p}{[}\PY{n}{y\PYZus{}web\PYZus{}test}\PY{p}{[}\PY{n}{img}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+              \PY{n}{sub\PYZus{}img}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X\PYZus{}web\PYZus{}test}\PY{p}{[}\PY{n}{img}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}222}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Run the predictions here and use the model to output the prediction for each image.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Make sure to pre\PYZhy{}process the images with the same pre\PYZhy{}processing pipeline used earlier.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+          
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          
+          \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+              \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{save\PYZus{}file}\PY{p}{)}
+              
+              \PY{n}{results} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{logits}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{X\PYZus{}web\PYZus{}test}\PY{p}{,}
+                                          \PY{n}{keep\PYZus{}prob}\PY{p}{:} \PY{l+m+mf}{1.}\PY{p}{\PYZcb{}}\PY{p}{)}
+              \PY{n}{results} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{results}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}web\PYZus{}test}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}     result\PYZus{}dict = [str(i) for i in results]}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Image}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{Prediction}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{Label Predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{40}\PY{p}{)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{results}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{n}{y\PYZus{}web\PYZus{}test}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{prediction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}u2713}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{prediction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}u274C}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{   }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}
+                        \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{prediction}\PY{p}{,} \PY{n}{signs\PYZus{}class}\PY{p}{[}\PY{n}{results}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[22, 27, 12, 30, 1, 13, 11]
+Image	Prediction	Label Predicted
+----------------------------------------
+0	   22		✓Bumpy road
+1	   27		✓Pedestrians
+2	   12		✓Priority road
+3	   28		❌Children crossing
+4	   2		❌Speed limit (50km/h)
+5	   13		✓Yield
+6	   11		✓Right-of-way at the next intersection
+
+    \end{Verbatim}
+
+    \hypertarget{analyze-performance}{%
+\subsubsection{Analyze Performance}\label{analyze-performance}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Calculate the accuracy for these 5 new images. }
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} For example, if the model predicted 1 out of 5 signs correctly, it\PYZsq{}s 20\PYZpc{} accurate on these new images.}
+          
+          
+          
+          \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+              \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{save\PYZus{}file}\PY{p}{)}
+              
+              \PY{n}{test\PYZus{}img\PYZus{}accuracy} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{accuracy}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{X\PYZus{}web\PYZus{}test}\PY{p}{,}
+                                                                \PY{n}{y}\PY{p}{:} \PY{n}{y\PYZus{}web\PYZus{}test}\PY{p}{,}
+                                                                \PY{n}{keep\PYZus{}prob}\PY{p}{:} \PY{l+m+mf}{1.}\PY{p}{\PYZcb{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Images Accuracy = }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{test\PYZus{}img\PYZus{}accuracy} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Images Accuracy = 71.429\%
+
+    \end{Verbatim}
+
+    \hypertarget{output-top-5-softmax-probabilities-for-each-image-found-on-the-web}{%
+\subsubsection{Output Top 5 Softmax Probabilities For Each Image Found
+on the
+Web}\label{output-top-5-softmax-probabilities-for-each-image-found-on-the-web}}
+
+    For each of the new images, print out the model's softmax probabilities
+to show the \textbf{certainty} of the model's predictions (limit the
+output to the top 5 probabilities for each image).
+\href{https://www.tensorflow.org/versions/r0.12/api_docs/python/nn.html\#top_k}{\texttt{tf.nn.top\_k}}
+could prove helpful here.
+
+The example below demonstrates how tf.nn.top\_k can be used to find the
+top k predictions for each image.
+
+\texttt{tf.nn.top\_k} will return the values and indices (class ids) of
+the top k predictions. So if k=3, for each sign, it'll return the 3
+largest probabilities (out of a possible 43) and the correspoding class
+ids.
+
+Take this numpy array as an example. The values in the array represent
+predictions. The array contains softmax probabilities for five candidate
+images with six possible classes. \texttt{tf.nn.top\_k} is used to
+choose the three classes with the highest probability:
+
+\begin{verbatim}
+# (5, 6) array
+a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
+         0.12789202],
+       [ 0.28086119,  0.27569815,  0.08594638,  0.0178669 ,  0.18063401,
+         0.15899337],
+       [ 0.26076848,  0.23664738,  0.08020603,  0.07001922,  0.1134371 ,
+         0.23892179],
+       [ 0.11943333,  0.29198961,  0.02605103,  0.26234032,  0.1351348 ,
+         0.16505091],
+       [ 0.09561176,  0.34396535,  0.0643941 ,  0.16240774,  0.24206137,
+         0.09155967]])
+\end{verbatim}
+
+Running it through \texttt{sess.run(tf.nn.top\_k(tf.constant(a),\ k=3))}
+produces:
+
+\begin{verbatim}
+TopKV2(values=array([[ 0.34763842,  0.24879643,  0.12789202],
+       [ 0.28086119,  0.27569815,  0.18063401],
+       [ 0.26076848,  0.23892179,  0.23664738],
+       [ 0.29198961,  0.26234032,  0.16505091],
+       [ 0.34396535,  0.24206137,  0.16240774]]), indices=array([[3, 0, 5],
+       [0, 1, 4],
+       [0, 5, 1],
+       [1, 3, 5],
+       [1, 4, 3]], dtype=int32))
+\end{verbatim}
+
+Looking just at the first row we get
+\texttt{{[}\ 0.34763842,\ \ 0.24879643,\ \ 0.12789202{]}}, you can
+confirm these are the 3 largest probabilities in \texttt{a}. You'll also
+notice \texttt{{[}3,\ 0,\ 5{]}} are the corresponding indices.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}201}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Print out the top five softmax probabilities for the predictions on the German traffic sign images found on the web. }
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+          
+          
+          \PY{n}{softmax} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax}\PY{p}{(}\PY{n}{logits}\PY{p}{)}
+          \PY{n}{top\PYZus{}5} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{top\PYZus{}k}\PY{p}{(}\PY{n}{softmax}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{np}\PY{o}{.}\PY{n}{set\PYZus{}printoptions}\PY{p}{(}\PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+          
+          \PY{n}{highest} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{correct} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{results}\PY{p}{:}
+              \PY{n}{highest}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{signs\PYZus{}class}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{y\PYZus{}web\PYZus{}test}\PY{p}{:}
+              \PY{n}{correct}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{signs\PYZus{}class}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              
+              
+          \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+              \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{save\PYZus{}file}\PY{p}{)}
+              \PY{n}{results}\PY{p}{,} \PY{n}{results\PYZus{}index} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{top\PYZus{}5}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{X\PYZus{}web\PYZus{}test}\PY{p}{,}
+                                          \PY{n}{keep\PYZus{}prob}\PY{p}{:} \PY{l+m+mf}{1.}\PY{p}{\PYZcb{}}\PY{p}{)}
+              \PY{n}{sched} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{results}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{highest}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Top 5 Probabilites}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{results}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Top 5 Indices}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{results\PYZus{}index}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Top 5 Probabilites
+[[  9.99769e-01   2.27380e-04   2.85477e-06   3.35261e-07   2.02507e-09]
+ [  1.00000e+00   0.00000e+00   0.00000e+00   0.00000e+00   0.00000e+00]
+ [  9.75987e-01   9.87989e-03   7.68926e-03   6.27490e-03   1.49197e-04]
+ [  1.00000e+00   4.14025e-12   6.22968e-18   5.64746e-21   1.40992e-24]
+ [  1.00000e+00   1.06451e-12   8.43391e-20   2.17012e-22   6.22166e-24]
+ [  9.99999e-01   5.88612e-07   3.24534e-07   5.65037e-11   6.34226e-13]
+ [  9.99938e-01   6.21680e-05   1.51868e-11   7.25790e-12   2.42915e-12]]
+
+Top 5 Indices
+[[22 17 14 29 26]
+ [13  0  1  2  3]
+ [27 24 11 18 21]
+ [11 30 27 21 18]
+ [12 13 10 14 38]
+ [30 23 11 20 17]
+ [ 1  2  5  4 14]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Table Showing Highest Five Percentages / Test Image }\PY{l+s+se}{\PYZbs{}}
+          \PY{l+s+s1}{      }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsh{}Labels shown represent the highest prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{float\PYZus{}format} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:,.3f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}
+          \PY{n}{sched}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Table Showing Highest Five Percentages / Test Image       
+\#Labels shown represent the highest prediction
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}202}]:}                                               1       2       3       4  \textbackslash{}
+          Bumpy road                             99.977 \% 0.023 \% 0.000 \% 0.000 \%   
+          Yield                                 100.000 \% 0.000 \% 0.000 \% 0.000 \%   
+          Pedestrians                            97.599 \% 0.988 \% 0.769 \% 0.627 \%   
+          Right-of-way at the next intersection 100.000 \% 0.000 \% 0.000 \% 0.000 \%   
+          Priority road                         100.000 \% 0.000 \% 0.000 \% 0.000 \%   
+          Beware of ice/snow                    100.000 \% 0.000 \% 0.000 \% 0.000 \%   
+          Speed limit (30km/h)                   99.994 \% 0.006 \% 0.000 \% 0.000 \%   
+          
+                                                      5  
+          Bumpy road                            0.000 \%  
+          Yield                                 0.000 \%  
+          Pedestrians                           0.015 \%  
+          Right-of-way at the next intersection 0.000 \%  
+          Priority road                         0.000 \%  
+          Beware of ice/snow                    0.000 \%  
+          Speed limit (30km/h)                  0.000 \%  
+\end{Verbatim}
+            
+    \hypertarget{project-writeup}{%
+\subsubsection{Project Writeup}\label{project-writeup}}
+
+Once you have completed the code implementation, document your results
+in a project writeup using this
+\href{https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup_template.md}{template}
+as a guide. The writeup can be in a markdown or pdf file.
+
+    \begin{quote}
+\textbf{Note}: Once you have completed all of the code implementations
+and successfully answered each question above, you may finalize your
+work by exporting the iPython Notebook as an HTML document. You can do
+this by using the menu above and navigating to \n``,''\textbf{File
+-\textgreater{} Download as -\textgreater{} HTML (.html)}. Include the
+finished document along with this notebook as your submission.
+\end{quote}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{step-4-optional-visualize-the-neural-networks-state-with-test-images}{%
+\subsection{Step 4 (Optional): Visualize the Neural Network's State with
+Test
+Images}\label{step-4-optional-visualize-the-neural-networks-state-with-test-images}}
+
+This Section is not required to complete but acts as an additional
+excersise for understaning the output of a neural network's weights.
+While neural networks can be a great learning device they are often
+referred to as a black box. We can understand what the weights of a
+neural network look like better by plotting their feature maps. After
+successfully training your neural network you can see what it's feature
+maps look like by plotting the output of the network's weight layers in
+response to a test stimuli image. From these plotted feature maps, it's
+possible to see what characteristics of an image the network finds
+interesting. For a sign, maybe the inner network feature maps react with
+high activation to the sign's boundary outline or to the contrast in the
+sign's painted symbol.
+
+Provided for you below is the function code that allows you to get the
+visualization output of any tensorflow weight layer you want. The inputs
+to the function should be a stimuli image, one used during training or a
+new one you provided, and then the tensorflow variable name that
+represents the layer's state during the training process, for instance
+if you wanted to see what the
+\href{https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/6df7ae49-c61c-4bb2-a23e-6527e69209ec/lessons/601ae704-1035-4287-8b11-e2c2716217ad/concepts/d4aca031-508f-4e0b-b493-e7b706120f81}{LeNet
+lab's} feature maps looked like for it's second convolutional layer you
+could enter conv2 as the tf\_activation variable.
+
+For an example of what feature map outputs look like, check out NVIDIA's
+results in their paper
+\href{https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/}{End-to-End
+Deep Learning for Self-Driving Cars} in the section Visualization of
+internal CNN State. NVIDIA was able to show that their network's inner
+weights had high activations to road boundary lines by comparing feature
+maps from an image with a clear path to one without. Try experimenting
+with a similar test to show that your trained network's weights are
+looking for interesting features, whether it's looking at differences in
+feature maps from images with or without a sign, or even what feature
+maps look like in a trained network vs a completely untrained one on the
+same sign image.
+
+Your output should look something like this (above)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Visualize your network\PYZsq{}s feature maps here.}
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Feel free to use as many code cells as needed.}
+          
+          \PY{c+c1}{\PYZsh{} image\PYZus{}input: the test image being fed into the network to produce the feature maps}
+          \PY{c+c1}{\PYZsh{} tf\PYZus{}activation: should be a tf variable name used during your training procedure that represents the calculated state of a specific weight layer}
+          \PY{c+c1}{\PYZsh{} activation\PYZus{}min/max: can be used to view the activation contrast in more detail, by default matplot sets min and max to the actual min and max values of the output}
+          \PY{c+c1}{\PYZsh{} plt\PYZus{}num: used to plot out multiple different weight feature map sets on the same block, just extend the plt number for each new feature map entry}
+          
+          \PY{k}{def} \PY{n+nf}{outputFeatureMap}\PY{p}{(}\PY{n}{image\PYZus{}input}\PY{p}{,} \PY{n}{tf\PYZus{}activation}\PY{p}{,} \PY{n}{activation\PYZus{}min}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{activation\PYZus{}max}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{p}{,}\PY{n}{plt\PYZus{}num}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} Here make sure to preprocess your image\PYZus{}input in a way your network expects}
+              \PY{c+c1}{\PYZsh{} with size, normalization, ect if needed}
+              \PY{c+c1}{\PYZsh{} image\PYZus{}input =}
+              
+              \PY{n}{image\PYZus{}input} \PY{o}{=} \PY{n}{image\PYZus{}input}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+              \PY{n}{image\PYZus{}input} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{image\PYZus{}input}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Note: x should be the same name as your network\PYZsq{}s tensorflow data placeholder variable}
+              \PY{c+c1}{\PYZsh{} If you get an error tf\PYZus{}activation is not defined it may be having trouble accessing the variable from inside a function}
+              \PY{n}{activation} \PY{o}{=} \PY{n}{tf\PYZus{}activation}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{session}\PY{o}{=}\PY{n}{sess}\PY{p}{,}\PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{x} \PY{p}{:} \PY{n}{image\PYZus{}input}\PY{p}{\PYZcb{}}\PY{p}{)}
+              \PY{n}{featuremaps} \PY{o}{=} \PY{n}{activation}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{plt\PYZus{}num}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+              \PY{k}{for} \PY{n}{featuremap} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{featuremaps}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{featuremap}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} sets the number of feature maps to show on each row and column}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FeatureMap }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{featuremap}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} displays the feature map number}
+                  \PY{k}{if} \PY{n}{activation\PYZus{}min} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{\PYZam{}} \PY{n}{activation\PYZus{}max} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{activation}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,} \PY{n}{featuremap}\PY{p}{]}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nearest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{vmin} \PY{o}{=}\PY{n}{activation\PYZus{}min}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{n}{activation\PYZus{}max}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{k}{elif} \PY{n}{activation\PYZus{}max} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{activation}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,} \PY{n}{featuremap}\PY{p}{]}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nearest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{n}{activation\PYZus{}max}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{k}{elif} \PY{n}{activation\PYZus{}min} \PY{o}{!=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{activation}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,} \PY{n}{featuremap}\PY{p}{]}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nearest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{n}{activation\PYZus{}min}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{activation}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,} \PY{n}{featuremap}\PY{p}{]}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nearest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+              \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{save\PYZus{}file}\PY{p}{)}
+              \PY{n}{outputFeatureMap}\PY{p}{(}\PY{n}{X\PYZus{}web\PYZus{}test}\PY{p}{,} \PY{n}{CONV2\PYZus{}BIAS}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}205}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Image Resembling the Activations / Feature Map}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X\PYZus{}web\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Image Resembling the Activations / Feature Map
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}205}]:} <matplotlib.image.AxesImage at 0x7f461f5241d0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
