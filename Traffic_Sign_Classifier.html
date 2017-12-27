@@ -12975,7 +12975,7 @@ Model saved
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[257]:</div>
+<div class="prompt input_prompt">In&nbsp;[291]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Run the predictions here and use the model to output the prediction for each image.</span>
@@ -12993,15 +12993,15 @@ Model saved
     
     <span class="nb">print</span><span class="p">(</span><span class="n">y_web_test</span><span class="p">)</span>
 <span class="c1">#     result_dict = [str(i) for i in results]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image</span><span class="se">\t</span><span class="s1">Prediction</span><span class="se">\t</span><span class="s1">Label Predicted&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image</span><span class="se">\t</span><span class="s1">Prediction</span><span class="se">\t</span><span class="s1">Actual Label</span><span class="se">\t</span><span class="s1">  Label Predicted&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">y_web_test</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
             <span class="n">prediction</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u2713</span><span class="s1">&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">prediction</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u274C</span><span class="s1">&#39;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="se">\t</span><span class="s1">   </span><span class="si">{}</span><span class="se">\t\t</span><span class="si">{}{}</span><span class="s1">&#39;</span>
-              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">signs_class</span><span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="se">\t</span><span class="s1">   </span><span class="si">{}</span><span class="se">\t</span><span class="s1"> </span><span class="se">\t</span><span class="si">{}</span><span class="se">\t\t</span><span class="si">{}</span><span class="s1">  </span><span class="si">{}</span><span class="se">\t</span><span class="s1">&#39;</span>
+              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">signs_class</span><span class="p">[</span><span class="n">y_web_test</span><span class="p">[</span><span class="n">i</span><span class="p">]][:</span><span class="mi">6</span><span class="p">],</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">signs_class</span><span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span>
 </pre></div>
 
 </div>
@@ -13019,15 +13019,15 @@ Model saved
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[1, 11, 22, 30, 27, 12, 13]
-Image	Prediction	Label Predicted
-----------------------------------------
-0	   1		✓Speed limit (30km/h)
-1	   11		✓Right-of-way at the next intersection
-2	   22		✓Bumpy road
-3	   30		✓Beware of ice/snow
-4	   24		❌Road narrows on the right
-5	   12		✓Priority road
-6	   13		✓Yield
+Image	Prediction	Actual Label	  Label Predicted
+--------------------------------------------------
+0	   1	 	Speed 		✓  Speed limit (30km/h)	
+1	   11	 	Right-		✓  Right-of-way at the next intersection	
+2	   22	 	Bumpy 		✓  Bumpy road	
+3	   30	 	Beware		✓  Beware of ice/snow	
+4	   24	 	Pedest		❌  Road narrows on the right	
+5	   12	 	Priori		✓  Priority road	
+6	   13	 	Yield		✓  Yield	
 </pre>
 </div>
 </div>
