@@ -49,7 +49,6 @@ The goals / steps of this project are the following:
 
 
 ---
-### Writeup / README
 
 ### Data Set Summary & Exploration
 
@@ -62,7 +61,7 @@ signs data set:
 * The shape of a traffic sign image is 32x32 
 * The number of unique classes/labels in the data set is 43 classes
 
-#### 2. Include an exploratory visualization of the dataset.
+#### 2. Exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
